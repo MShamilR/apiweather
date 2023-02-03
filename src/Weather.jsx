@@ -107,9 +107,9 @@ const Weather = ({ cityCode, units, api, index }) => {
                 <p className="grid grid-2">{Math.round(weather.main.temp)}°c</p>
                 <p className="grid grid-3">{dateTime}</p>
                 <p className="grid grid-4">
-                  <span className="icon weatherIcon">
+                  <div className="icon weatherIcon">
                     <img src={icon} /* alt={mist} */ />
-                  </span>
+                  </div>
                   <span>{weather.weather[0].description}</span>
                 </p>
                 <p className="grid grid-6">

@@ -81,8 +81,10 @@
   justify-content: center;
   .weatherIcon {
     margin-right: 0.5rem;
-    height: 26px;
-    width: auto;
+    img {
+      max-height: 26px;
+      max-width: auto;
+    }
   }
 }
 
