@@ -4,10 +4,10 @@ import moment from "moment/moment";
 import arrow from "./assets/arrow.svg";
 import mist from "./assets/mist.svg";
 import cloud from "./assets/cloud.svg";
-import snow from "./assets/snow.svg";
+import snow from "./assets/snow.png";
 import clear from "./assets/clear.svg";
 import rain from "./assets/rain.svg";
-import thunderstorm from "./assets/thunderstorm.svg";
+import thunderstorm from "./assets/thunderstorm.png";
 import brokenCloud from "./assets/brokenCloud.svg";
 import exclamation from "./assets/exclamation.png";
 
