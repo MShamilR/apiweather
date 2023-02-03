@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import moment from "moment/moment";
-import arrow from "./assets/arrow.png";
-import mist from "./assets/mist.png";
-import cloud from "./assets/cloud.png";
-import snow from "./assets/snow.png";
-import clear from "./assets/clear.png";
-import rain from "./assets/rain.png";
-import thunderstorm from "./assets/thunderstorm.png";
-import brokenCloud from "./assets/brokenCloud.png";
+import arrow from "./assets/arrow.svg";
+import mist from "./assets/mist.svg";
+import cloud from "./assets/cloud.svg";
+import snow from "./assets/snow.svg";
+import clear from "./assets/clear.svg";
+import rain from "./assets/rain.svg";
+import thunderstorm from "./assets/thunderstorm.svg";
+import brokenCloud from "./assets/brokenCloud.svg";
 import exclamation from "./assets/exclamation.png";
 
 const Weather = ({ cityCode, units, api, index }) => {

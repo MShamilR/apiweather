@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Weather from "./Weather";
 import cities from "./cities.json";
-import logo from "./assets/weatherIcon.png";
+import logo from "./assets/weatherIcon.svg";
 import "./App.scss";
 
 function App() {
