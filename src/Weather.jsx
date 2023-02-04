@@ -27,7 +27,7 @@ const Weather = ({ cityCode, units, api, index }) => {
 
   /*  const datetime = format(new Date(), "h.maaa, LLL d"); */
 
-    useEffect(() => {
+  /* useEffect(() => {
       const fetchWeather = async () => {
         try {
           const response = await fetch(
@@ -44,29 +44,27 @@ const Weather = ({ cityCode, units, api, index }) => {
         }
       };
       fetchWeather();
-    }, [cityCode, units]);
-
-  /* const fetchWeather = async () => {
+    }, [cityCode, units]); */
+  const fetchWeather = async () => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
     );
     const weatherData = await response.json();
+    setWeather(weatherData);
     return weatherData;
   };
 
-  const { isLoading, data, isError, error, isFetching } = useQuery(
-    ["weather-data"],
-    fetchWeather, staletime
+  const { isLoading, data, isError, error, isFetching, isSuccess } = useQuery(
+    [`${cityCode}-weather-data`],
+    fetchWeather
   );
 
-  console.log({ isLoading, isFetching, data });
- */
   useEffect(() => {
-    if (weather.name) {
-      const timezone = weather.timezone;
-      const unixDateTime = weather.dt;
-      const unixSunrise = weather.sys.sunrise;
-      const unixSunset = weather.sys.sunset;
+    if (data) {
+      const timezone = data.timezone;
+      const unixDateTime = data.dt;
+      const unixSunrise = data.sys.sunrise;
+      const unixSunset = data.sys.sunset;
       const dateTimeData = moment
         .utc(unixDateTime, "X")
         .add(timezone, "seconds")
@@ -82,98 +80,100 @@ const Weather = ({ cityCode, units, api, index }) => {
       setDateTime(dateTimeData);
       setSunrise(sunriseData);
       setSunset(sunsetData);
-      if (weather.weather[0].id <= 232) {
+      if (data.weather[0].id <= 232) {
         setIcon(thunderstorm);
-      } else if (weather.weather[0].id <= 531) {
+      } else if (data.weather[0].id <= 531) {
         setIcon(rain);
-      } else if (weather.weather[0].id <= 622) {
+      } else if (data.weather[0].id <= 622) {
         setIcon(snow);
-      } else if (weather.weather[0].id <= 781) {
+      } else if (data.weather[0].id <= 781) {
         setIcon(mist);
-      } else if (weather.weather[0].id === 800) {
+      } else if (data.weather[0].id === 800) {
         setIcon(clear);
-      } else if (weather.weather[0].id === 803) {
+      } else if (data.weather[0].id === 803) {
         setIcon(brokenCloud);
-      } else if (weather.weather[0].id === 801 || 802 || 804) {
+      } else if (data.weather[0].id === 801 || 802 || 804) {
         setIcon(cloud);
       } else {
         setIcon(exclamation);
       }
     }
-    /* switch (weather.weather[0].id) {
-      case value:
-        
-        break;
-    
-      default:
-        break;
-    } */
   }, [weather]);
+
+  if (isLoading) {
+    return <h4>Loading Weather...</h4>;
+  }
+
+  if (error) {
+    return <h1>{error.message}</h1>;
+  }
+
+  console.log({ isLoading, isFetching, data, isSuccess });
+  console.log(data.timezone);
 
   return (
     <>
-      {weather.name && (
-        <div className={`children`}>
-          <div className="innerFlex">
-            <div className="bgImg">
-              <div className={`flexChild innerGrid color-${index}`}>
-                <p className={`grid grid-1`}>
-                  {weather.name}, {weather.sys.country}, {city}
-                </p>
-                <p className="grid grid-2">{Math.round(weather.main.temp)}°c</p>
-                <p className="grid grid-3">{dateTime}</p>
-                <p className="grid grid-4">
-                  <div className="icon weatherIcon">
-                    <img src={icon} /* alt={mist} */ />
-                  </div>
-                  <span>{weather.weather[0].description}</span>
-                </p>
-                <p className="grid grid-6">
-                  Temp Min: {Math.round(weather.main.temp_min)}°C
-                </p>
-                <p className="grid grid-7">
-                  Temp Max: {Math.round(weather.main.temp_max)}°C
-                </p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="flexChild singleColor">
-              <div>
-                <p>
-                  <b>Pressure: </b> {weather.main.pressure}Pa
-                </p>
-                <p>
-                  <b>Humidity: </b> {weather.main.humidity}%
-                </p>
-                <p>
-                  <b>Visibility: </b> {(weather.visibility / 1000).toFixed(1)}km
-                </p>
-              </div>
-              <div className="windParent">
-                <p className="wind">
-                  <span className="icon">
-                    <img src={arrow} alt="arrow" />
-                  </span>
-                  <span>
-                    {weather.wind.speed} m/s {weather.wind.deg} Degree
-                  </span>
-                </p>
-              </div>
-              <div className="sunParent">
-                <p>
-                  <b>Sunrise: </b>
-                  {sunrise}
-                </p>
-                <p>
-                  <b>Sunset: </b>
-                  {sunset}
-                </p>
-              </div>
+      <div className={`children`}>
+        <div className="innerFlex">
+          <div className="bgImg">
+            <div className={`flexChild innerGrid color-${index}`}>
+              <p className={`grid grid-1`}>
+                {data.name}, {data.sys.country},
+              </p>
+              <p className="grid grid-2">{Math.round(data.main.temp)}°c</p>
+              <p className="grid grid-3">{dateTime}</p>
+              <p className="grid grid-4">
+                <div className="icon weatherIcon">
+                  <img src={icon} /* alt={mist} */ />
+                </div>
+                <span>{data.weather[0].description}</span>
+              </p>
+              <p className="grid grid-6">
+                Temp Min: {Math.round(data.main.temp_min)}°C
+              </p>
+              <p className="grid grid-7">
+                Temp Max: {Math.round(data.main.temp_max)}°C
+              </p>
             </div>
           </div>
         </div>
-      )}
+        <div>
+          <div className="flexChild singleColor">
+            <div>
+              <p>
+                <b>Pressure: </b> {data.main.pressure}Pa
+              </p>
+              <p>
+                <b>Humidity: </b> {data.main.humidity}%
+              </p>
+              <p>
+                <b>Visibility: </b> {(data.visibility / 1000).toFixed(1)}
+                km
+              </p>
+            </div>
+            <div className="windParent">
+              <p className="wind">
+                <span className="icon">
+                  <img src={arrow} alt="arrow" />
+                </span>
+                <span>
+                  {data.wind.speed} m/s {data.wind.deg} Degree
+                </span>
+              </p>
+            </div>
+            <div className="sunParent">
+              <p>
+                <b>Sunrise: </b>
+                {sunrise}
+              </p>
+              <p>
+                <b>Sunset: </b>
+                {sunset}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
