@@ -121,12 +121,47 @@
 
 @media only screen and (max-width: 1080px) {
   .parent {
+    max-width: calc(976px * 0.8);
+    grid-gap: calc(2rem * 0.8);
+  }
+  .children {
+    max-width: calc(480px * 0.8);
+  }
+
+  .grid-1 {
+    font-size: calc(18px * 0.8);
+  }
+
+  .grid-2 {
+    font-size: calc(2.2rem * 0.8);
+  }
+
+  .grid-4 {
+    .weatherIcon {
+      img {
+        max-height: calc(26px * 0.8);
+      }
+    }
+  }
+  /* .parent {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     .children {
       width: 480px;
+    }
+  } */
+}
+
+@media only screen and (max-width: 840px) {
+  .parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .children {
+      width: calc(480px * 0.8);
     }
   }
 }

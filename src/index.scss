@@ -39,4 +39,10 @@ body {
   align-items: center;
 }
 
+@media only screen and (max-width: 1080px) {
+  #root {
+    font-size: calc(14px * 0.8);
+  }
+}
+
 

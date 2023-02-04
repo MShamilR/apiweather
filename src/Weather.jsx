@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { format } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+/* import { format } from "date-fns"; */
 import moment from "moment/moment";
 import arrow from "./assets/arrow.svg";
 import mist from "./assets/mist.svg";
@@ -25,26 +27,40 @@ const Weather = ({ cityCode, units, api, index }) => {
 
   /*  const datetime = format(new Date(), "h.maaa, LLL d"); */
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
-        );
-        if (!response.ok) {
-          throw new Error(`Request failed with status code ${response.status}`);
+    useEffect(() => {
+      const fetchWeather = async () => {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
+          );
+          if (!response.ok) {
+            throw new Error(`Request failed with status code ${response.status}`);
+          }
+          const weatherData = await response.json();
+          console.log(weatherData);
+          setWeather(weatherData);
+        } catch (error) {
+          console.error(error);
         }
-        const weatherData = await response.json();
-        console.log(weatherData);
-        setWeather(weatherData);
-        /*  */
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchWeather();
-  }, [cityCode, units]);
+      };
+      fetchWeather();
+    }, [cityCode, units]);
 
+  /* const fetchWeather = async () => {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
+    );
+    const weatherData = await response.json();
+    return weatherData;
+  };
+
+  const { isLoading, data, isError, error, isFetching } = useQuery(
+    ["weather-data"],
+    fetchWeather, staletime
+  );
+
+  console.log({ isLoading, isFetching, data });
+ */
   useEffect(() => {
     if (weather.name) {
       const timezone = weather.timezone;
