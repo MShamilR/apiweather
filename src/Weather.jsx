@@ -59,6 +59,8 @@ const Weather = ({ cityCode, units, api, index }) => {
     fetchWeather
   );
 
+   console.log({ isLoading, isFetching, data, isSuccess });
+
   useEffect(() => {
     if (data) {
       const timezone = data.timezone;
@@ -108,8 +110,8 @@ const Weather = ({ cityCode, units, api, index }) => {
     return <h1>{error.message}</h1>;
   }
 
-  console.log({ isLoading, isFetching, data, isSuccess });
-  console.log(data.timezone);
+  /* console.log({ isLoading, isFetching, data, isSuccess });
+  console.log(data.timezone); */
 
   return (
     <>
@@ -122,12 +124,14 @@ const Weather = ({ cityCode, units, api, index }) => {
               </p>
               <p className="grid grid-2">{Math.round(data.main.temp)}°c</p>
               <p className="grid grid-3">{dateTime}</p>
-              <p className="grid grid-4">
+              <div className="grid grid-4">
                 <div className="icon weatherIcon">
                   <img src={icon} /* alt={mist} */ />
                 </div>
-                <span>{data.weather[0].description}</span>
-              </p>
+                <span>
+                  <p>{data.weather[0].description}</p>
+                </span>
+              </div>
               <p className="grid grid-6">
                 Temp Min: {Math.round(data.main.temp_min)}°C
               </p>
@@ -152,14 +156,16 @@ const Weather = ({ cityCode, units, api, index }) => {
               </p>
             </div>
             <div className="windParent">
-              <p className="wind">
+              <div className="wind">
                 <span className="icon">
                   <img src={arrow} alt="arrow" />
                 </span>
                 <span>
-                  {data.wind.speed} m/s {data.wind.deg} Degree
+                  <p>
+                    {data.wind.speed} m/s {data.wind.deg} Degree
+                  </p>
                 </span>
-              </p>
+              </div>
             </div>
             <div className="sunParent">
               <p>
