@@ -121,7 +121,7 @@ const Weather = ({ cityCode, units, api, index }) => {
             <div className="bgImg">
               <div className={`flexChild innerGrid color-${index}`}>
                 <p className={`grid grid-1`}>
-                  {data.name}, {data.sys.country},
+                  {data.name}, {data.sys.country}
                 </p>
                 <p className="grid grid-2">{Math.round(data.main.temp)}°c</p>
                 <p className="grid grid-3">{dateTime}</p>
