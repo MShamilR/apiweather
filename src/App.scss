@@ -5,119 +5,135 @@
   grid-template-rows: auto auto auto auto;
   /* background-color: #1f2128; */
   grid-gap: 2rem;
-  .children {
-    max-width: 480px;
-    color: white;
-  }
+  a {
+    transition: 0.15s;
+    :hover,
+    :focus {
+      /* box-shadow: 0 0.5em 0.5em -0.4em white; */
+      transform: translateY(-0.3rem);
+    }
+    .children {
+      max-width: 480px;
+      color: white;
+      transition: 0.25s;
+      .innerFlex {
+        pointer-events: none;
+      }
+    }
 
-  h4 {
-    color: white;
-  }
+    h4 {
+      color: white;
+    }
 
-  p {
-    margin: 0;
-  }
-  .color-0 {
-    background-color: #388de7c2;
-  }
-  .color-1 {
-    background-color: #6249ccc2;
-  }
-  .color-2 {
-    background-color: #40b681c2;
-  }
-  .color-3 {
-    background-color: #de944ec2;
-  }
-  .color-4 {
-    background-color: #9c3a3ac2;
-  }
-  .color-5 {
-    background-color: #388ee7c2;
-  }
-  .color-6 {
-    background-color: #6249ccc2;
-  }
-  .color-7 {
-    background-color: #40b681c2;
-  }
-}
-
-.flexChild {
-  padding: 1.5rem;
-}
-
-.innerGrid {
-  display: grid;
-  grid-template-columns: auto auto;
-  border-radius: 0.75rem 0.75rem 0 0;
-  /* opacity: 0.5; */
-}
-
-.bgImg {
-  background-image: url("./assets/bgCloud1.png");
-  border-radius: 0.75rem 0.75rem 0 0;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-}
-
-.grid-1 {
-  font-weight: 700;
-  font-size: 18px;
-}
-
-.grid-2 {
-  grid-row-end: span 2;
-  font-size: 2.2rem;
-  font-weight: 600;
-}
-
-.grid-4 {
-  grid-row-end: span 4;
-  text-transform: capitalize;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .weatherIcon {
-    margin-right: 0.5rem;
-    img {
-      max-height: 26px;
-      max-width: auto;
+    p {
+      margin: 0;
+    }
+    .color-0 {
+      background-color: #388de7c2;
+    }
+    .color-1 {
+      background-color: #6249ccc2;
+    }
+    .color-2 {
+      background-color: #40b681c2;
+    }
+    .color-3 {
+      background-color: #de944ec2;
+    }
+    .color-4 {
+      background-color: #9c3a3ac2;
+    }
+    .color-5 {
+      background-color: #388ee7c2;
+    }
+    .color-6 {
+      background-color: #6249ccc2;
+    }
+    .color-7 {
+      background-color: #40b681c2;
     }
   }
-}
 
-.singleColor {
-  border-radius: 0 0 0.75rem 0.75rem;
-  background-color: #383b47;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  justify-items: center;
-  .windParent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  /* div {
+    
+  } */
+
+  .flexChild {
+    padding: 1.5rem;
+    pointer-events: none;
   }
-  .sunParent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+  .innerGrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    border-radius: 0.75rem 0.75rem 0 0;
+    /* opacity: 0.5; */
   }
-  div {
-    align-content: center;
+
+  .bgImg {
+    background-image: url("./assets/bgCloud1.png");
+    border-radius: 0.75rem 0.75rem 0 0;
+  }
+
+  .grid {
+    display: flex;
     align-items: center;
-    .wind {
+    justify-content: center;
+    opacity: 1;
+  }
+
+  .grid-1 {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .grid-2 {
+    grid-row-end: span 2;
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+
+  .grid-4 {
+    grid-row-end: span 4;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .weatherIcon {
+      margin-right: 0.5rem;
+      img {
+        max-height: 26px;
+        max-width: auto;
+      }
+    }
+  }
+
+  .singleColor {
+    border-radius: 0 0 0.75rem 0.75rem;
+    background-color: #383b47;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-items: center;
+    .windParent {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sunParent {
       display: flex;
       flex-direction: column;
-      .icon {
-        align-self: center;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    div {
+      align-content: center;
+      align-items: center;
+      .wind {
+        display: flex;
+        flex-direction: column;
+        .icon {
+          align-self: center;
+        }
       }
     }
   }
