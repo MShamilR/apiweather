@@ -2,7 +2,7 @@
 
 body {
   background-color: #1f2128;
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: auto;
 
   background-image: url("./assets/mainBg.png");
@@ -33,10 +33,13 @@ body {
   background-color: #383b47;
   color: white;
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  p {
+    margin: 0.75rem;
+  }
 }
 
 @media only screen and (max-width: 1080px) {
@@ -44,5 +47,3 @@ body {
     font-size: calc(14px * 0.8);
   }
 }
-
-

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 /* import { format } from "date-fns"; */
 import moment from "moment/moment";
 import arrow from "./assets/arrow.svg";
@@ -46,10 +47,16 @@ const Weather = ({ cityCode, units, api, index }) => {
       fetchWeather();
     }, [cityCode, units]); */
   const fetchWeather = async () => {
-    const response = await fetch(
+    /* const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
     );
     const weatherData = await response.json();
+    setWeather(weatherData);
+    return weatherData; */
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?id=${cityCode}&units=${units}&appid=${api}`
+    );
+    const weatherData = await response.data;
     setWeather(weatherData);
     return weatherData;
   };
@@ -115,7 +122,7 @@ const Weather = ({ cityCode, units, api, index }) => {
 
   return (
     <>
-      <a>
+      <Link to={(data.name).toLowerCase()} state={{cityCode: `${cityCode}`, index: `${index}`}}>
         <div className={`children`}>
           <div className="innerFlex">
             <div className="bgImg">
@@ -144,7 +151,7 @@ const Weather = ({ cityCode, units, api, index }) => {
           </div>
           <div style={{ pointerEvents: "none" }}>
             <div className="flexChild singleColor">
-              <div>
+              <div className="pressureParent">
                 <p>
                   <b>Pressure: </b> {data.main.pressure}Pa
                 </p>
@@ -163,7 +170,7 @@ const Weather = ({ cityCode, units, api, index }) => {
                   </span>
                   <span>
                     <p>
-                      {data.wind.speed} m/s {data.wind.deg} Degree
+                      {(data.wind.speed).toFixed(1)}m/s {data.wind.deg} Degree
                     </p>
                   </span>
                 </div>
@@ -181,7 +188,7 @@ const Weather = ({ cityCode, units, api, index }) => {
             </div>
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };

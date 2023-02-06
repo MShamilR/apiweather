@@ -6,6 +6,7 @@
   /* background-color: #1f2128; */
   grid-gap: 2rem;
   a {
+    text-decoration: none;
     transition: 0.15s;
     :hover,
     :focus {
@@ -114,13 +115,20 @@
     flex-direction: row;
     justify-content: space-between;
     justify-items: center;
+    .pressureParent {
+      flex: 1;
+    }
     .windParent {
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .sunParent {
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: center;
       align-items: flex-end;
